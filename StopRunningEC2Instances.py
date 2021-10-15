@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 #A simple script to find running instances and stop them.
-#Use case: 
+#Use case: configure a cron job to stop dev/test machines nightly
 #Assumes default region is specified in ~/.aws/config
 #Confirmed Working on Python 3.8.10
 
