@@ -1,0 +1,31 @@
+#Have an EC2 instance snapshot itself, run as scheduled task
+ 
+  #setup for cmdlets to use creds
+  Initialize-AWSDefaultConfiguration -ProfileName Administrator -Region us-east-1
+
+  # Pull InstanceID from EC2 metadata
+  $MyInstanceID = (New-Object System.Net.WebClient).DownloadString("http://169.254.169.254/latest/meta-data/instance-id")
+
+  # Query for volumes that are attached to my Instance Id
+  $volumes = (Get-EC2Volume).Attachment | where {$_.InstanceId -eq $MyInstanceID } | Select VolumeId
+
+  # Snapshot each attached volume
+  foreach ($volume in $volumes)
+  {
+      New-EC2Snapshot $volume.VolumeId -Description "PS Snapshot for instance $MyInstanceID"
+  }
+
+  #cleanup snapshots older than 3 days with same Description
+
+  $Snapshots = Get-EC2Snapshot -OwnerID self | where {$_.Description -eq "PS Snapshot for instance $MyInstanceID"}
+
+  $RetentionDays = 3
+
+  foreach ($Snapshot in $Snapshots)
+      {
+      $Retention = ([DateTime]::Now).AddDays(-$RetentionDays)
+      if ([DateTime]::Compare($Retention, $Snapshot.StartTime) -gt 0)
+          {
+          Remove-EC2Snapshot -SnapshotId $snapshot.SnapshotId -Force
+          }
+      }
