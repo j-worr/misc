@@ -1,0 +1,16 @@
+#set the path you're evaluating
+$rootdir = "C:\TEST"
+ 
+#locate all folders matching certain keywords, ingoring certain system users
+$filteredfolders = Get-ChildItem $rootdir -Directory -Recurse | get-acl |select Path -expand Access |
+where{($_.Path -like '*HR*') -or ($_.Path -like '*Accounting*') -and ($_.IdentityReference -ne "NT AUTHORITY\SYSTEM") -and ($_.IdentityReference -ne "NT AUTHORITY\Authenticated Users")}
+ 
+#cleanup file path
+foreach($folder in $filteredfolders){
+$shortpath = $folder.Path -creplace '^[^::]*::', ''
+$folder.Path = $shortpath
+ 
+}
+ 
+#output csv to rootdir
+$filteredfolders | select path,identityreference, filesystemrights,accesscontroltype,isinherited | export-csv $rootdir\FolderPerms.csv
