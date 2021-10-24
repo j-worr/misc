@@ -1,0 +1,13 @@
+#Finding large files with Powershell
+
+  Get-ChildItem -recurse -force -erroraction silentlycontinue | where {$_.Length -gt 1Gb} | ft
+  
+  -If you want to find the 5 largest files, use the following:
+  
+  Get-ChildItem -recurse -force -erroraction silentlycontinue | where {$_.Length -gt 1Gb} | sort-object -Property Length | select-object -Last 5
+
+
+#Finding Long File Paths with Powershell
+
+  Get-ChildItem -Recurse | Where-Object {$_.FullName.Length -gt 260}
+
