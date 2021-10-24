@@ -1,0 +1,3 @@
+#AWS CLI- AWS Parameter Store - Recrieve Encrypted Secret:
+aws ssm get-parameter --name /SomeSecret --with-decryption --query "Parameter.Value" | sed -e 's/^"//' -e 's/"$//'
+
