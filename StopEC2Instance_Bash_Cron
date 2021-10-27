@@ -4,8 +4,6 @@ Cron:
 PATH=/usr/bin:/usr/local/bin
 * 19 * * * /usr/bin/bash /root/stop_ec2_instance >> /root/stop_ec2_instance.log 2>&1
 
-
-
 Stop single instance:
 
 #!/usr/bin/bash
