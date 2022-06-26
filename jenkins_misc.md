@@ -22,6 +22,11 @@ java -jar jenkins-cli.jar -s http://localhost:8085 -auth 'admin:Adm!n321' instal
 
 ### JENKINS TROUBLESHOOTING
 
+Restarting Jenkins
+```
+<jenkins-url>/restart and click on Yes to confirm
+```
+
 Clearing the build queue: Manage jenkins > Script Console
 ```
 Jenkins.instance.queue.clear()
