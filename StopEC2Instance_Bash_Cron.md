@@ -1,4 +1,4 @@
-### Cron:
+Cron:
 ```
 #need to add /usr/local/bin for or aws is not found when cron executes
 PATH=/usr/bin:/usr/local/bin
