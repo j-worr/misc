@@ -17,4 +17,4 @@ If you want to convert from tsv to csv:
 sed 's/\t/,/g' instances.tsv > instances.csv
 ```
 
-^that works on linux, maybe not on mac
+Source: https://thehftguy.com/2016/03/10/how-to-export-amazon-ec2-instances-to-a-csv-file/
