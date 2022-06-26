@@ -1,4 +1,4 @@
-## List all EC2 Instances with various key parameters into a tabbed separated value
+## List all EC2 Instances with various parameters into a tabbed separated value
 
 ```
 aws ec2 describe-instances --output text --query 'Reservations[*].Instances[*].[InstanceId, InstanceType, KeyName, State.Name, LaunchTime, VpcId, SubnetId, Placement.AvailabilityZone,  PrivateIpAddress, PrivateDnsName, PublicDnsName, [Tags[?Key==`Name`].Value] [0][0], [Tags[?Key==`environment`].Value] [0][0], [Tags[?Key==`team`].Value] [0][0] ]' > instances.tsv
