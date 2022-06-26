@@ -44,5 +44,4 @@ You can find the proper job full name with Script Console >
 ```
 
 Previously those didn't work and had to run a `systemctl restart jenkins' when no jobs where actually running
-
---> Also in this scenario, adding additional executors allowed new attempts to work.![image](https://user-images.githubusercontent.com/76519886/175838172-01542914-a737-4081-a2ee-67f0ed41978b.png)
+--> Also in this scenario, adding additional executors allowed new attempts to work.
